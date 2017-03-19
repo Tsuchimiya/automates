@@ -1,0 +1,681 @@
+   0  $accept : Asm $end
+
+   1  Asm : Instructions
+
+   2  Instructions : Instruction Instructions
+   3               |
+
+   4  Instruction : tadd treg tnb treg tnb treg tnb
+   5              | tmul treg tnb treg tnb treg tnb
+   6              | tdiv treg tnb treg tnb treg tnb
+   7              | tsou treg tnb treg tnb treg tnb
+   8              | tcop treg tnb treg tnb
+   9              | tload treg tnb tnb
+  10              | tstore tnb treg tnb
+  11              | tafc treg tnb tnb
+  12              | tequ treg tnb treg tnb treg tnb
+  13              | tinf treg tnb treg tnb treg tnb
+  14              | tinfe treg tnb treg tnb treg tnb
+  15              | tsup treg tnb treg tnb treg tnb
+  16              | tsupe treg tnb treg tnb treg tnb
+  17              | tjmp tnb
+  18              | tjmpc tnb treg tnb
+
+state 0
+	$accept : . Asm $end  (0)
+	Instructions : .  (3)
+
+	tadd  shift 1
+	tmul  shift 2
+	tsou  shift 3
+	tdiv  shift 4
+	tcop  shift 5
+	tafc  shift 6
+	tload  shift 7
+	tstore  shift 8
+	tjmp  shift 9
+	tinf  shift 10
+	tinfe  shift 11
+	tsup  shift 12
+	tsupe  shift 13
+	tjmpc  shift 14
+	tequ  shift 15
+	$end  reduce 3
+
+	Asm  goto 16
+	Instructions  goto 17
+	Instruction  goto 18
+
+
+state 1
+	Instruction : tadd . treg tnb treg tnb treg tnb  (4)
+
+	treg  shift 19
+	.  error
+
+
+state 2
+	Instruction : tmul . treg tnb treg tnb treg tnb  (5)
+
+	treg  shift 20
+	.  error
+
+
+state 3
+	Instruction : tsou . treg tnb treg tnb treg tnb  (7)
+
+	treg  shift 21
+	.  error
+
+
+state 4
+	Instruction : tdiv . treg tnb treg tnb treg tnb  (6)
+
+	treg  shift 22
+	.  error
+
+
+state 5
+	Instruction : tcop . treg tnb treg tnb  (8)
+
+	treg  shift 23
+	.  error
+
+
+state 6
+	Instruction : tafc . treg tnb tnb  (11)
+
+	treg  shift 24
+	.  error
+
+
+state 7
+	Instruction : tload . treg tnb tnb  (9)
+
+	treg  shift 25
+	.  error
+
+
+state 8
+	Instruction : tstore . tnb treg tnb  (10)
+
+	tnb  shift 26
+	.  error
+
+
+state 9
+	Instruction : tjmp . tnb  (17)
+
+	tnb  shift 27
+	.  error
+
+
+state 10
+	Instruction : tinf . treg tnb treg tnb treg tnb  (13)
+
+	treg  shift 28
+	.  error
+
+
+state 11
+	Instruction : tinfe . treg tnb treg tnb treg tnb  (14)
+
+	treg  shift 29
+	.  error
+
+
+state 12
+	Instruction : tsup . treg tnb treg tnb treg tnb  (15)
+
+	treg  shift 30
+	.  error
+
+
+state 13
+	Instruction : tsupe . treg tnb treg tnb treg tnb  (16)
+
+	treg  shift 31
+	.  error
+
+
+state 14
+	Instruction : tjmpc . tnb treg tnb  (18)
+
+	tnb  shift 32
+	.  error
+
+
+state 15
+	Instruction : tequ . treg tnb treg tnb treg tnb  (12)
+
+	treg  shift 33
+	.  error
+
+
+state 16
+	$accept : Asm . $end  (0)
+
+	$end  accept
+
+
+state 17
+	Asm : Instructions .  (1)
+
+	.  reduce 1
+
+
+state 18
+	Instructions : Instruction . Instructions  (2)
+	Instructions : .  (3)
+
+	tadd  shift 1
+	tmul  shift 2
+	tsou  shift 3
+	tdiv  shift 4
+	tcop  shift 5
+	tafc  shift 6
+	tload  shift 7
+	tstore  shift 8
+	tjmp  shift 9
+	tinf  shift 10
+	tinfe  shift 11
+	tsup  shift 12
+	tsupe  shift 13
+	tjmpc  shift 14
+	tequ  shift 15
+	$end  reduce 3
+
+	Instructions  goto 34
+	Instruction  goto 18
+
+
+state 19
+	Instruction : tadd treg . tnb treg tnb treg tnb  (4)
+
+	tnb  shift 35
+	.  error
+
+
+state 20
+	Instruction : tmul treg . tnb treg tnb treg tnb  (5)
+
+	tnb  shift 36
+	.  error
+
+
+state 21
+	Instruction : tsou treg . tnb treg tnb treg tnb  (7)
+
+	tnb  shift 37
+	.  error
+
+
+state 22
+	Instruction : tdiv treg . tnb treg tnb treg tnb  (6)
+
+	tnb  shift 38
+	.  error
+
+
+state 23
+	Instruction : tcop treg . tnb treg tnb  (8)
+
+	tnb  shift 39
+	.  error
+
+
+state 24
+	Instruction : tafc treg . tnb tnb  (11)
+
+	tnb  shift 40
+	.  error
+
+
+state 25
+	Instruction : tload treg . tnb tnb  (9)
+
+	tnb  shift 41
+	.  error
+
+
+state 26
+	Instruction : tstore tnb . treg tnb  (10)
+
+	treg  shift 42
+	.  error
+
+
+state 27
+	Instruction : tjmp tnb .  (17)
+
+	.  reduce 17
+
+
+state 28
+	Instruction : tinf treg . tnb treg tnb treg tnb  (13)
+
+	tnb  shift 43
+	.  error
+
+
+state 29
+	Instruction : tinfe treg . tnb treg tnb treg tnb  (14)
+
+	tnb  shift 44
+	.  error
+
+
+state 30
+	Instruction : tsup treg . tnb treg tnb treg tnb  (15)
+
+	tnb  shift 45
+	.  error
+
+
+state 31
+	Instruction : tsupe treg . tnb treg tnb treg tnb  (16)
+
+	tnb  shift 46
+	.  error
+
+
+state 32
+	Instruction : tjmpc tnb . treg tnb  (18)
+
+	treg  shift 47
+	.  error
+
+
+state 33
+	Instruction : tequ treg . tnb treg tnb treg tnb  (12)
+
+	tnb  shift 48
+	.  error
+
+
+state 34
+	Instructions : Instruction Instructions .  (2)
+
+	.  reduce 2
+
+
+state 35
+	Instruction : tadd treg tnb . treg tnb treg tnb  (4)
+
+	treg  shift 49
+	.  error
+
+
+state 36
+	Instruction : tmul treg tnb . treg tnb treg tnb  (5)
+
+	treg  shift 50
+	.  error
+
+
+state 37
+	Instruction : tsou treg tnb . treg tnb treg tnb  (7)
+
+	treg  shift 51
+	.  error
+
+
+state 38
+	Instruction : tdiv treg tnb . treg tnb treg tnb  (6)
+
+	treg  shift 52
+	.  error
+
+
+state 39
+	Instruction : tcop treg tnb . treg tnb  (8)
+
+	treg  shift 53
+	.  error
+
+
+state 40
+	Instruction : tafc treg tnb . tnb  (11)
+
+	tnb  shift 54
+	.  error
+
+
+state 41
+	Instruction : tload treg tnb . tnb  (9)
+
+	tnb  shift 55
+	.  error
+
+
+state 42
+	Instruction : tstore tnb treg . tnb  (10)
+
+	tnb  shift 56
+	.  error
+
+
+state 43
+	Instruction : tinf treg tnb . treg tnb treg tnb  (13)
+
+	treg  shift 57
+	.  error
+
+
+state 44
+	Instruction : tinfe treg tnb . treg tnb treg tnb  (14)
+
+	treg  shift 58
+	.  error
+
+
+state 45
+	Instruction : tsup treg tnb . treg tnb treg tnb  (15)
+
+	treg  shift 59
+	.  error
+
+
+state 46
+	Instruction : tsupe treg tnb . treg tnb treg tnb  (16)
+
+	treg  shift 60
+	.  error
+
+
+state 47
+	Instruction : tjmpc tnb treg . tnb  (18)
+
+	tnb  shift 61
+	.  error
+
+
+state 48
+	Instruction : tequ treg tnb . treg tnb treg tnb  (12)
+
+	treg  shift 62
+	.  error
+
+
+state 49
+	Instruction : tadd treg tnb treg . tnb treg tnb  (4)
+
+	tnb  shift 63
+	.  error
+
+
+state 50
+	Instruction : tmul treg tnb treg . tnb treg tnb  (5)
+
+	tnb  shift 64
+	.  error
+
+
+state 51
+	Instruction : tsou treg tnb treg . tnb treg tnb  (7)
+
+	tnb  shift 65
+	.  error
+
+
+state 52
+	Instruction : tdiv treg tnb treg . tnb treg tnb  (6)
+
+	tnb  shift 66
+	.  error
+
+
+state 53
+	Instruction : tcop treg tnb treg . tnb  (8)
+
+	tnb  shift 67
+	.  error
+
+
+state 54
+	Instruction : tafc treg tnb tnb .  (11)
+
+	.  reduce 11
+
+
+state 55
+	Instruction : tload treg tnb tnb .  (9)
+
+	.  reduce 9
+
+
+state 56
+	Instruction : tstore tnb treg tnb .  (10)
+
+	.  reduce 10
+
+
+state 57
+	Instruction : tinf treg tnb treg . tnb treg tnb  (13)
+
+	tnb  shift 68
+	.  error
+
+
+state 58
+	Instruction : tinfe treg tnb treg . tnb treg tnb  (14)
+
+	tnb  shift 69
+	.  error
+
+
+state 59
+	Instruction : tsup treg tnb treg . tnb treg tnb  (15)
+
+	tnb  shift 70
+	.  error
+
+
+state 60
+	Instruction : tsupe treg tnb treg . tnb treg tnb  (16)
+
+	tnb  shift 71
+	.  error
+
+
+state 61
+	Instruction : tjmpc tnb treg tnb .  (18)
+
+	.  reduce 18
+
+
+state 62
+	Instruction : tequ treg tnb treg . tnb treg tnb  (12)
+
+	tnb  shift 72
+	.  error
+
+
+state 63
+	Instruction : tadd treg tnb treg tnb . treg tnb  (4)
+
+	treg  shift 73
+	.  error
+
+
+state 64
+	Instruction : tmul treg tnb treg tnb . treg tnb  (5)
+
+	treg  shift 74
+	.  error
+
+
+state 65
+	Instruction : tsou treg tnb treg tnb . treg tnb  (7)
+
+	treg  shift 75
+	.  error
+
+
+state 66
+	Instruction : tdiv treg tnb treg tnb . treg tnb  (6)
+
+	treg  shift 76
+	.  error
+
+
+state 67
+	Instruction : tcop treg tnb treg tnb .  (8)
+
+	.  reduce 8
+
+
+state 68
+	Instruction : tinf treg tnb treg tnb . treg tnb  (13)
+
+	treg  shift 77
+	.  error
+
+
+state 69
+	Instruction : tinfe treg tnb treg tnb . treg tnb  (14)
+
+	treg  shift 78
+	.  error
+
+
+state 70
+	Instruction : tsup treg tnb treg tnb . treg tnb  (15)
+
+	treg  shift 79
+	.  error
+
+
+state 71
+	Instruction : tsupe treg tnb treg tnb . treg tnb  (16)
+
+	treg  shift 80
+	.  error
+
+
+state 72
+	Instruction : tequ treg tnb treg tnb . treg tnb  (12)
+
+	treg  shift 81
+	.  error
+
+
+state 73
+	Instruction : tadd treg tnb treg tnb treg . tnb  (4)
+
+	tnb  shift 82
+	.  error
+
+
+state 74
+	Instruction : tmul treg tnb treg tnb treg . tnb  (5)
+
+	tnb  shift 83
+	.  error
+
+
+state 75
+	Instruction : tsou treg tnb treg tnb treg . tnb  (7)
+
+	tnb  shift 84
+	.  error
+
+
+state 76
+	Instruction : tdiv treg tnb treg tnb treg . tnb  (6)
+
+	tnb  shift 85
+	.  error
+
+
+state 77
+	Instruction : tinf treg tnb treg tnb treg . tnb  (13)
+
+	tnb  shift 86
+	.  error
+
+
+state 78
+	Instruction : tinfe treg tnb treg tnb treg . tnb  (14)
+
+	tnb  shift 87
+	.  error
+
+
+state 79
+	Instruction : tsup treg tnb treg tnb treg . tnb  (15)
+
+	tnb  shift 88
+	.  error
+
+
+state 80
+	Instruction : tsupe treg tnb treg tnb treg . tnb  (16)
+
+	tnb  shift 89
+	.  error
+
+
+state 81
+	Instruction : tequ treg tnb treg tnb treg . tnb  (12)
+
+	tnb  shift 90
+	.  error
+
+
+state 82
+	Instruction : tadd treg tnb treg tnb treg tnb .  (4)
+
+	.  reduce 4
+
+
+state 83
+	Instruction : tmul treg tnb treg tnb treg tnb .  (5)
+
+	.  reduce 5
+
+
+state 84
+	Instruction : tsou treg tnb treg tnb treg tnb .  (7)
+
+	.  reduce 7
+
+
+state 85
+	Instruction : tdiv treg tnb treg tnb treg tnb .  (6)
+
+	.  reduce 6
+
+
+state 86
+	Instruction : tinf treg tnb treg tnb treg tnb .  (13)
+
+	.  reduce 13
+
+
+state 87
+	Instruction : tinfe treg tnb treg tnb treg tnb .  (14)
+
+	.  reduce 14
+
+
+state 88
+	Instruction : tsup treg tnb treg tnb treg tnb .  (15)
+
+	.  reduce 15
+
+
+state 89
+	Instruction : tsupe treg tnb treg tnb treg tnb .  (16)
+
+	.  reduce 16
+
+
+state 90
+	Instruction : tequ treg tnb treg tnb treg tnb .  (12)
+
+	.  reduce 12
+
+
+20 terminals, 4 nonterminals
+19 grammar rules, 91 states
