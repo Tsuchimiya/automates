@@ -10,7 +10,7 @@
   int prof=0;
   void yyerror (char const *s);
   %}
-
+// %error-verbose compile pas avec ça
 %union { int nb; char *var;};
 %token tmin tplus tmul tdiv tif telse twhile tao taf tpo tpf tv tpv teq teqeq tret tint tstring tet tou tinclude tdefine tconst tmain tinf tinfeq tsup tsupeq terror tprintf
 
@@ -34,6 +34,7 @@
 %type <nb> Invoc;
 %type <nb> tpo;
 %type <nb> twhile;
+%type <nb> Else;
 
 %%
 Prog:Fonctions{printf("prog\n");}; 
@@ -80,7 +81,7 @@ Body { printf("if\n");  instr[$2][1]=indice_tab()+1;
   $2=indice_tab(); 
   ajout_instr(JMPC,0,R0,VIDE);
 
-} Else {instr[$2][1]=$8;}
+} Else {instr[$2][1]=$8;};
 
 Else : telse Body {$$=indice_tab();} ;
 
@@ -129,12 +130,12 @@ E: tid {printf("tid arithm\n");
 	    ajout_instr(STORE,$$,R0,VIDE);
 }
 
-| E teqeq E {  ajout_instr(LOAD,R0,$1,VIDE);
-               ajout_instr(LOAD,R1,$3,VIDE);
-	       ajout_instr(EQU,R0,R1,R0);
-	       free_last_tmp();
-	       $$=ajout_tmp();
-	       ajout_instr(STORE,$$,R0,VIDE);
+| E teqeq E {  ajout_instr(LOAD,R0,$1,VIDE); // MARCHE PAS
+            ajout_instr(LOAD,R1,$3,VIDE);
+	    ajout_instr(EQU,R0,R0,R1);
+	    free_last_tmp(); 
+	    $$=ajout_tmp();
+	    ajout_instr(STORE,$$,R0,VIDE);
     }
 | E tet E {ajout_instr(AFC,R0,0,VIDE);
            ajout_instr(LOAD,R1,$3,VIDE);
@@ -247,8 +248,9 @@ Decln: tv Decl1 Decln
        {printf("Decln\n");};
 %%
 
- void yyerror (char const *s) {
-   fprintf (stderr, "%s\n", s);
+  void yyerror (char const *s) {
+   extern int yylineno;
+  fprintf(stderr, "At line %d: %s\n", yylineno, s);
  }
 
 main ()

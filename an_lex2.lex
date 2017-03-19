@@ -28,8 +28,8 @@
  ")"       {printf("tpf\n"); return tpf; }
  ","       {printf("tv\n"); return tv; }
  ";"       {printf("tpv\n"); return tpv; }
- "="       {printf("teq\n"); return teq; }
  "=="      {printf("teqeq\n"); return teqeq; }
+ "="       {printf("teq\n"); return teq; }
  "return"  {printf("treturn\n"); return tret; }
  "int"     {printf("tint\n"); return tint; }
 "printf"   {printf("tprintf\n"); return tprintf;}
