@@ -39,6 +39,7 @@ void affiche_instr(){
       case SUPE: fprintf(f,"SUPE r%d r%d r%d\n",instr[i][1],instr[i][2],instr[i][3]);break;
       case JMP: fprintf(f,"JMP %d \n",instr[i][1]);break;
       case JMPC: fprintf(f,"JMPC %d r%d \n",instr[i][1],instr[i][2]);break;
+      case JMPR: fprintf(f,"JMPR r%d \n",instr[i][1]);break;
       }
     }
     fclose(f);

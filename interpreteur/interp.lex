@@ -23,9 +23,9 @@
 "INFE" {return tinfe; }
 "JMP"  {return tjmp; }
 "JMPC"  {return tjmpc; }
-
+"JMPR" {return tjmpr; }
 
 "r"      {return treg;} 
-[0-9]+ { yylval.nb=atoi(yytext); return tnb;}
+-?[0-9]+ { yylval.nb=atoi(yytext); return tnb;}
 
 . {printf("erreur\n"); return terror;}

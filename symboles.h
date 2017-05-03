@@ -22,9 +22,7 @@ struct cellule {
 
 struct cellule tab[TAILLE];
 
-struct cellule tmp[TAILLE]; // pour le free c'est plus facile, et pour + de var
-
-
+void afficher(struct cellule * t, int index);
 int ajout (char* var,int init, int prof);
 int adresse(char*var);
 int var_initialized(char*var);
@@ -33,5 +31,6 @@ void free_last_tmp();
 int ajout_tmp();
 int i_tab();
 int i_tmp();
-
+void reset_symb();
+void restauration_symb(int tab,int tmp);
 #endif

@@ -1,0 +1,31 @@
+AFC r21 0 
+AFC r22 0 
+AFC r23 0 
+JMP 8 
+
+LOAD r0 1 
+STORE 2 r0 
+LOAD r0 2 
+STORE 2 r0 
+JMPR r21 
+
+AFC r0 1 
+STORE 0 r0 
+LOAD r0 0 
+STORE 0 r0 
+STORE 1 r22 
+STORE 2 r21 
+AFC r0 2 
+STORE 3 r0 
+AFC r0 2 
+STORE 4 r0 
+LOAD r0 4 
+STORE 5 r0 
+AFC r0 6 
+ADD r22 r22 r0 
+AFC r0 2 
+SOU r22 r22 r0 
+AFC r21 26 
+JMP 3 
+LOAD r21 -1 
+LOAD r22 -2 

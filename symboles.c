@@ -3,7 +3,7 @@
 
 
 int index_tab=0; // index de la prochaine case dispo
-int index_tmp=0;
+int index_tmp=TAILLE-1;
 
 
 
@@ -11,17 +11,14 @@ int i_tab(){
   return index_tab;
 }
 int i_tmp(){
-  return index_tmp;
+  return index_tab;
 }
 
-
-/*void init_tab(){
-  int i;
-  for(i=0;i<TAILLE;i++){
-    tab[i].case_pleine=0;
-  }
-  }*/
-
+void restauration_symb(int tab,int tmp){
+  index_tmp=tmp;
+  index_tab=tab;
+  
+}
 
 
 int ajout_int (struct cellule * tab1,char* var,int init, int prof, int *index){
@@ -54,9 +51,20 @@ int ajout (char* var,int init, int prof){
 }
 
 int ajout_tmp(){
-  char buffer=(char)index_tmp;
-  ajout_int(tmp,&buffer,INITIALIZED,0,&index_tmp);
-  return index_tmp-1+256;
+ return  ajout("",INITIALIZED,-1);
+  /* char buffer=(char)index_tmp;
+  if (index_tmp>index_tab){
+    tab[index_tmp].nom=malloc(sizeof(buffer));
+    strcpy(tab[index_tmp].nom,&buffer);
+    tab[index_tmp].init=INITIALIZED;
+    tab[index_tmp].profondeur=-1;
+    tab[index_tmp].adresse=index_tmp;
+    
+    index_tmp--;
+  return index_tmp+1;
+  }
+  else 
+  return -1;*/
 }
 
 
@@ -86,12 +94,19 @@ int var_initialized(char*var){
 }
 
 void free_last_tmp(){
-  int i;
-	for (i=0;i<index_tmp;i++){
-      free(tmp[index_tmp].nom);
-      tmp[index_tmp].nom=NULL;
-}
-  index_tmp=0;
+  int i; 
+if (index_tmp>index_tab){
+      free(tab[index_tab].nom);
+      tab[index_tab].nom=NULL;
+      index_tab--;
+ }
+  /*
+  if (index_tmp>index_tab){
+      free(tab[index_tmp].nom);
+      tab[index_tmp].nom=NULL;
+     
+  index_tmp--;
+  }*/
 }
 
 void enlever(int prof){
@@ -119,8 +134,12 @@ void afficher(struct cellule * t, int index){
     
   }
 }
-
-/*int main(int argc,char argv[]){
+void reset_symb(){
+  index_tab=0;
+  index_tmp=TAILLE-1;
+}
+/*
+int main(int argc,char argv[]){
 
   ajout("test1",INITIALIZED,0);
   printf("%d\n",index_tab);
@@ -128,16 +147,17 @@ void afficher(struct cellule * t, int index){
   ajout("test2",INITIALIZED,1);
   printf("%d\n",index_tab);
 
-  ajout("test3",INITIALIZED,1); 
+  ajout_tmp(); 
   printf("%d\n",index_tab);
 
-  afficher(tab,index_tab);
+  afficher(tab,TAILLE);
+  free_last_tmp();
 
   enlever(1);
   printf("%d\n",index_tab);
-  afficher(tab,index_tab);
+  afficher(tab,TAILLE);
   printf(" ------------------- %d \n",adresse("test1"));
   
 
-  }
-*/
+  }*/
+

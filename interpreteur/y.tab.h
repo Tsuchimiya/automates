@@ -12,10 +12,11 @@
 #define tsup 268
 #define tsupe 269
 #define tjmpc 270
-#define tequ 271
-#define terror 272
-#define treg 273
-#define tnb 274
+#define tjmpr 271
+#define tequ 272
+#define terror 273
+#define treg 274
+#define tnb 275
 #ifdef YYSTYPE
 #undef  YYSTYPE_IS_DECLARED
 #define YYSTYPE_IS_DECLARED 1

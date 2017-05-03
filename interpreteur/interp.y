@@ -6,11 +6,10 @@
   #define TAILLE 256
   int regs[39];
   int memory[TAILLE];
-  int tmp[TAILLE];
   void yyerror (char const *s);
   %}
 %union { int nb; char *var;};
-%token tadd tmul tsou tdiv tcop tafc tload tstore tjmp tinf tinfe tsup tsupe tjmpc tequ terror treg
+%token tadd tmul tsou tdiv tcop tafc tload tstore tjmp tinf tinfe tsup tsupe tjmpc tjmpr tequ terror treg
 
 %token <nb> tnb;
 
@@ -34,13 +33,18 @@ Instructions: Instruction Instructions
 
        case COP:regs[instr[i][1]]=regs[instr[i][2]];break;
 
-     case LOAD: if (instr[i][2]<=255) {
-	 regs[instr[i][1]]=memory[instr[i][2]];}
-                else regs[instr[i][1]]=tmp[instr[i][2]-256];break;
-
-     case STORE:if (instr[i][1]<=255) {
-	 memory[instr[i][1]]= regs[instr[i][2]]; }
-		  else tmp[ instr[i][1]-256]= regs[instr[i][2]];break;
+     case LOAD: 
+	 
+         printf("LOAD: adresse : R%d  %d R22=%d\n",instr[i][1],memory[instr[i][2]+regs[22]],regs[22]);
+	 regs[instr[i][1]]=memory[instr[i][2]+regs[22]];
+	 break;
+		// A CHANGER, temporaire
+     case STORE:
+		  printf("STORE: adresse : %d valeur : %d R22=%d\n",instr[i][1]+regs[22],regs[instr[i][2]],regs[22]);
+		  memory[instr[i][1]+regs[22]]= regs[instr[i][2]]; 
+        
+      
+	     break;
 
        case AFC:  regs[instr[i][1]]= instr[i][2];break;
 	
@@ -50,25 +54,28 @@ Instructions: Instruction Instructions
 
        case INFE:  regs[instr[i][1]]=regs[instr[i][2]]<=regs[instr[i][3]];break;
 
-       case SUP:  regs[instr[i][1]]=regs[instr[i][2]]>regs[instr[i][3]];break;
+     case SUP:  regs[instr[i][1]]=(regs[instr[i][2]]>regs[instr[i][3]]);break;
 
        case SUPE:  regs[instr[i][1]]=regs[instr[i][2]]>=regs[instr[i][3]];break;
 
-     case JMP: i=(instr[i][1]);break;
+     case JMP: i=instr[i][1];break;
 
      case JMPC: if (regs[instr[i][2]]!=0 )
 		   i=instr[i][1];break;
+
+     case JMPR: i=regs[instr[i][1]];break;
      }
 
 	      }
 
 
-for (i=0;i<10;i++){
+for (i=0;i<20;i++){
    
      printf("mem %d : %d\n",i,memory[i]);
      /* printf("tmp %d : %d\n",i,tmp[i]);
 	printf("reg %d: %d\n",i,regs[i]);*/
    }
+ printf("R23 : %d\n",regs[23]);
  };
 
 Instruction: tadd treg tnb  treg tnb  treg  tnb   {ajout_instr(ADD,$3,$5,$7);}
@@ -87,6 +94,7 @@ Instruction: tadd treg tnb  treg tnb  treg  tnb   {ajout_instr(ADD,$3,$5,$7);}
             |tsupe treg tnb treg tnb treg tnb {ajout_instr(SUPE,$3,$5,$7);}
             |tjmp tnb {ajout_instr(JMP,$2,VIDE,VIDE);}
             |tjmpc tnb treg tnb {ajout_instr(JMPC,$2,$4,VIDE);}
+|tjmpr treg tnb {ajout_instr(JMPR,$3,VIDE,VIDE);}
 
     
 ;

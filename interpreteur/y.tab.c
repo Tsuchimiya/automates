@@ -24,10 +24,9 @@ static const char yysccsid[] = "@(#)yaccpar	1.9 (Berkeley) 02/21/93";
   #define TAILLE 256
   int regs[39];
   int memory[TAILLE];
-  int tmp[TAILLE];
   void yyerror (char const *s);
   
-#line 12 "interp.y"
+#line 11 "interp.y"
 #ifdef YYSTYPE
 #undef  YYSTYPE_IS_DECLARED
 #define YYSTYPE_IS_DECLARED 1
@@ -36,7 +35,7 @@ static const char yysccsid[] = "@(#)yaccpar	1.9 (Berkeley) 02/21/93";
 #define YYSTYPE_IS_DECLARED 1
 typedef union { int nb; char *var;} YYSTYPE;
 #endif /* !YYSTYPE_IS_DECLARED */
-#line 39 "y.tab.c"
+#line 38 "y.tab.c"
 
 /* compatibility with bison */
 #ifdef YYPARSE_PARAM
@@ -83,88 +82,92 @@ extern int YYPARSE_DECL();
 #define tsup 268
 #define tsupe 269
 #define tjmpc 270
-#define tequ 271
-#define terror 272
-#define treg 273
-#define tnb 274
+#define tjmpr 271
+#define tequ 272
+#define terror 273
+#define treg 274
+#define tnb 275
 #define YYERRCODE 256
 static const short yylhs[] = {                           -1,
     0,    1,    1,    2,    2,    2,    2,    2,    2,    2,
-    2,    2,    2,    2,    2,    2,    2,    2,
+    2,    2,    2,    2,    2,    2,    2,    2,    2,
 };
 static const short yylen[] = {                            2,
     1,    2,    0,    7,    7,    7,    7,    5,    4,    4,
-    4,    7,    7,    7,    7,    7,    2,    4,
+    4,    7,    7,    7,    7,    7,    2,    4,    3,
 };
 static const short yydefred[] = {                         0,
     0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
-    0,    0,    0,    0,    0,    0,    1,    0,    0,    0,
-    0,    0,    0,    0,    0,    0,   17,    0,    0,    0,
-    0,    0,    0,    2,    0,    0,    0,    0,    0,    0,
+    0,    0,    0,    0,    0,    0,    0,    1,    0,    0,
+    0,    0,    0,    0,    0,    0,    0,   17,    0,    0,
+    0,    0,    0,    0,    0,    2,    0,    0,    0,    0,
+    0,    0,    0,    0,    0,    0,    0,    0,    0,   19,
+    0,    0,    0,    0,    0,    0,   11,    9,   10,    0,
+    0,    0,    0,   18,    0,    0,    0,    0,    0,    8,
     0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
-    0,    0,    0,   11,    9,   10,    0,    0,    0,    0,
-   18,    0,    0,    0,    0,    0,    8,    0,    0,    0,
-    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
-    0,    4,    5,    7,    6,   13,   14,   15,   16,   12,
+    0,    0,    0,    0,    4,    5,    7,    6,   13,   14,
+   15,   16,   12,
 };
-static const short yydgoto[] = {                         16,
-   17,   18,
+static const short yydgoto[] = {                         17,
+   18,   19,
 };
 static const short yysindex[] = {                      -257,
  -258, -256, -255, -254, -253, -252, -251, -250, -249, -247,
- -246, -245, -244, -243, -241,    0,    0, -257, -240, -239,
- -238, -237, -236, -235, -234, -232,    0, -231, -230, -229,
- -228, -226, -225,    0, -223, -222, -221, -220, -219, -218,
- -217, -216, -214, -213, -212, -211, -210, -208, -207, -206,
- -205, -204, -203,    0,    0,    0, -202, -201, -200, -199,
-    0, -198, -196, -195, -194, -193,    0, -192, -191, -190,
- -189, -188, -187, -186, -185, -184, -183, -182, -181, -180,
- -179,    0,    0,    0,    0,    0,    0,    0,    0,    0,
+ -246, -245, -244, -243, -241, -240,    0,    0, -257, -239,
+ -238, -237, -236, -235, -234, -233, -231,    0, -230, -229,
+ -228, -227, -225, -224, -223,    0, -221, -220, -219, -218,
+ -217, -216, -215, -214, -212, -211, -210, -209, -208,    0,
+ -206, -205, -204, -203, -202, -201,    0,    0,    0, -200,
+ -199, -198, -197,    0, -196, -194, -193, -192, -191,    0,
+ -190, -189, -188, -187, -186, -185, -184, -183, -182, -181,
+ -180, -179, -178, -177,    0,    0,    0,    0,    0,    0,
+    0,    0,    0,
 };
-static const short yyrindex[] = {                        16,
+static const short yyrindex[] = {                        17,
     0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
-    0,    0,    0,    0,    0,    0,    0,   16,    0,    0,
-    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
-    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
+    0,    0,    0,    0,    0,    0,    0,    0,   17,    0,
     0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
     0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
     0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
     0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
     0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
+    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
+    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
+    0,    0,    0,
 };
 static const short yygindex[] = {                         0,
     5,    0,
 };
-#define YYTABLESIZE 95
+#define YYTABLESIZE 98
 static const short yytable[] = {                          1,
     2,    3,    4,    5,    6,    7,    8,    9,   10,   11,
-   12,   13,   14,   15,   19,    3,   20,   21,   22,   23,
-   24,   25,   34,   26,   27,   28,   29,   30,   31,    0,
-   32,   33,    0,   35,   36,   37,   38,   39,   40,   41,
-   42,    0,   43,   44,   45,   46,   47,    0,   48,   49,
-   50,   51,   52,   53,    0,   54,   55,   56,   57,   58,
-   59,   60,    0,   61,   62,    0,   63,   64,   65,   66,
+   12,   13,   14,   15,   16,   20,    3,   21,   22,   23,
+   24,   25,   26,   36,   27,   28,   29,   30,   31,   32,
+    0,   33,   34,   35,    0,   37,   38,   39,   40,   41,
+   42,   43,   44,    0,   45,   46,   47,   48,   49,    0,
+   50,   51,   52,   53,   54,   55,   56,    0,   57,   58,
+   59,   60,   61,   62,   63,    0,   64,   65,    0,   66,
    67,   68,   69,   70,   71,   72,   73,   74,   75,   76,
-   77,   78,   79,   80,   81,    0,   82,   83,   84,   85,
-   86,   87,   88,   89,   90,
+   77,   78,   79,   80,   81,   82,   83,   84,    0,   85,
+   86,   87,   88,   89,   90,   91,   92,   93,
 };
 static const short yycheck[] = {                        257,
   258,  259,  260,  261,  262,  263,  264,  265,  266,  267,
-  268,  269,  270,  271,  273,    0,  273,  273,  273,  273,
-  273,  273,   18,  274,  274,  273,  273,  273,  273,   -1,
-  274,  273,   -1,  274,  274,  274,  274,  274,  274,  274,
-  273,   -1,  274,  274,  274,  274,  273,   -1,  274,  273,
-  273,  273,  273,  273,   -1,  274,  274,  274,  273,  273,
-  273,  273,   -1,  274,  273,   -1,  274,  274,  274,  274,
-  274,  274,  274,  274,  274,  274,  273,  273,  273,  273,
-  273,  273,  273,  273,  273,   -1,  274,  274,  274,  274,
-  274,  274,  274,  274,  274,
+  268,  269,  270,  271,  272,  274,    0,  274,  274,  274,
+  274,  274,  274,   19,  275,  275,  274,  274,  274,  274,
+   -1,  275,  274,  274,   -1,  275,  275,  275,  275,  275,
+  275,  275,  274,   -1,  275,  275,  275,  275,  274,   -1,
+  275,  275,  274,  274,  274,  274,  274,   -1,  275,  275,
+  275,  274,  274,  274,  274,   -1,  275,  274,   -1,  275,
+  275,  275,  275,  275,  275,  275,  275,  275,  275,  274,
+  274,  274,  274,  274,  274,  274,  274,  274,   -1,  275,
+  275,  275,  275,  275,  275,  275,  275,  275,
 };
-#define YYFINAL 16
+#define YYFINAL 17
 #ifndef YYDEBUG
 #define YYDEBUG 0
 #endif
-#define YYMAXTOKEN 274
+#define YYMAXTOKEN 275
 #define YYTRANSLATE(a) ((a) > YYMAXTOKEN ? (YYMAXTOKEN + 1) : (a))
 #if YYDEBUG
 static const char *yyname[] = {
@@ -177,7 +180,7 @@ static const char *yyname[] = {
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"tadd","tmul","tsou","tdiv",
 "tcop","tafc","tload","tstore","tjmp","tinf","tinfe","tsup","tsupe","tjmpc",
-"tequ","terror","treg","tnb","illegal-symbol",
+"tjmpr","tequ","terror","treg","tnb","illegal-symbol",
 };
 static const char *yyrule[] = {
 "$accept : Asm",
@@ -199,6 +202,7 @@ static const char *yyrule[] = {
 "Instruction : tsupe treg tnb treg tnb treg tnb",
 "Instruction : tjmp tnb",
 "Instruction : tjmpc tnb treg tnb",
+"Instruction : tjmpr treg tnb",
 
 };
 #endif
@@ -236,7 +240,7 @@ typedef struct {
 } YYSTACKDATA;
 /* variables for the parser stack */
 static YYSTACKDATA yystack;
-#line 94 "interp.y"
+#line 102 "interp.y"
  void yyerror (char const *s) {
    fprintf (stderr, "%s\n", s);
  }
@@ -245,7 +249,7 @@ main ()
 {
   return yyparse() ;
 }
-#line 247 "y.tab.c"
+#line 251 "y.tab.c"
 
 #if YYDEBUG
 #include <stdio.h>		/* needed for printf */
@@ -448,7 +452,7 @@ yyreduce:
     switch (yyn)
     {
 case 3:
-#line 25 "interp.y"
+#line 24 "interp.y"
 	{int i=0; for (i=0;i<indice_tab();i++){
      switch (instr[i][0]){
        case ADD: regs[instr[i][1]]=regs[instr[i][2]]+regs[instr[i][3]];break;
@@ -461,13 +465,18 @@ case 3:
 
        case COP:regs[instr[i][1]]=regs[instr[i][2]];break;
 
-     case LOAD: if (instr[i][2]<=255) {
-	 regs[instr[i][1]]=memory[instr[i][2]];}
-                else regs[instr[i][1]]=tmp[instr[i][2]-256];break;
-
-     case STORE:if (instr[i][1]<=255) {
-	 memory[instr[i][1]]= regs[instr[i][2]]; }
-		  else tmp[ instr[i][1]-256]= regs[instr[i][2]];break;
+     case LOAD: 
+	 
+         printf("LOAD: adresse : R%d  %d R22=%d\n",instr[i][1],memory[instr[i][2]+regs[22]],regs[22]);
+	 regs[instr[i][1]]=memory[instr[i][2]+regs[22]];
+	 break;
+		/* A CHANGER, temporaire*/
+     case STORE:
+		  printf("STORE: adresse : %d valeur : %d R22=%d\n",instr[i][1]+regs[22],regs[instr[i][2]],regs[22]);
+		  memory[instr[i][1]+regs[22]]= regs[instr[i][2]]; 
+        
+      
+	     break;
 
        case AFC:  regs[instr[i][1]]= instr[i][2];break;
 	
@@ -477,88 +486,95 @@ case 3:
 
        case INFE:  regs[instr[i][1]]=regs[instr[i][2]]<=regs[instr[i][3]];break;
 
-       case SUP:  regs[instr[i][1]]=regs[instr[i][2]]>regs[instr[i][3]];break;
+     case SUP:  regs[instr[i][1]]=(regs[instr[i][2]]>regs[instr[i][3]]);break;
 
        case SUPE:  regs[instr[i][1]]=regs[instr[i][2]]>=regs[instr[i][3]];break;
 
-     case JMP: i=(instr[i][1]);break;
+     case JMP: i=instr[i][1];break;
 
      case JMPC: if (regs[instr[i][2]]!=0 )
 		   i=instr[i][1];break;
+
+     case JMPR: i=regs[instr[i][1]];break;
      }
 
 	      }
 
 
-for (i=0;i<10;i++){
+for (i=0;i<20;i++){
    
      printf("mem %d : %d\n",i,memory[i]);
      /* printf("tmp %d : %d\n",i,tmp[i]);
 	printf("reg %d: %d\n",i,regs[i]);*/
    }
+ printf("R23 : %d\n",regs[23]);
  }
 break;
 case 4:
-#line 74 "interp.y"
+#line 81 "interp.y"
 	{ajout_instr(ADD,yystack.l_mark[-4].nb,yystack.l_mark[-2].nb,yystack.l_mark[0].nb);}
 break;
 case 5:
-#line 75 "interp.y"
+#line 82 "interp.y"
 	{ ajout_instr(MUL,yystack.l_mark[-4].nb,yystack.l_mark[-2].nb,yystack.l_mark[0].nb);}
 break;
 case 6:
-#line 76 "interp.y"
+#line 83 "interp.y"
 	{ ajout_instr(DIV,yystack.l_mark[-4].nb,yystack.l_mark[-2].nb,yystack.l_mark[0].nb);}
 break;
 case 7:
-#line 77 "interp.y"
+#line 84 "interp.y"
 	{ ajout_instr(SOU,yystack.l_mark[-4].nb,yystack.l_mark[-2].nb,yystack.l_mark[0].nb);}
 break;
 case 8:
-#line 78 "interp.y"
+#line 85 "interp.y"
 	{ajout_instr(COP,yystack.l_mark[-2].nb,yystack.l_mark[0].nb, VIDE);}
 break;
 case 9:
-#line 80 "interp.y"
+#line 87 "interp.y"
 	{ajout_instr(LOAD,yystack.l_mark[-1].nb,yystack.l_mark[0].nb,VIDE);}
 break;
 case 10:
-#line 81 "interp.y"
+#line 88 "interp.y"
 	{ajout_instr(STORE,yystack.l_mark[-2].nb,yystack.l_mark[0].nb,VIDE);}
 break;
 case 11:
-#line 82 "interp.y"
+#line 89 "interp.y"
 	{ajout_instr(AFC,yystack.l_mark[-1].nb,yystack.l_mark[0].nb, VIDE);}
 break;
 case 12:
-#line 83 "interp.y"
+#line 90 "interp.y"
 	{ajout_instr(EQU,yystack.l_mark[-4].nb,yystack.l_mark[-2].nb,yystack.l_mark[0].nb);}
 break;
 case 13:
-#line 84 "interp.y"
+#line 91 "interp.y"
 	{ajout_instr(INF,yystack.l_mark[-4].nb,yystack.l_mark[-2].nb,yystack.l_mark[0].nb);}
 break;
 case 14:
-#line 85 "interp.y"
+#line 92 "interp.y"
 	{ajout_instr(INFE,yystack.l_mark[-4].nb,yystack.l_mark[-2].nb,yystack.l_mark[0].nb);}
 break;
 case 15:
-#line 86 "interp.y"
+#line 93 "interp.y"
 	{ajout_instr(SUP,yystack.l_mark[-4].nb,yystack.l_mark[-2].nb,yystack.l_mark[0].nb);}
 break;
 case 16:
-#line 87 "interp.y"
+#line 94 "interp.y"
 	{ajout_instr(SUPE,yystack.l_mark[-4].nb,yystack.l_mark[-2].nb,yystack.l_mark[0].nb);}
 break;
 case 17:
-#line 88 "interp.y"
+#line 95 "interp.y"
 	{ajout_instr(JMP,yystack.l_mark[0].nb,VIDE,VIDE);}
 break;
 case 18:
-#line 89 "interp.y"
+#line 96 "interp.y"
 	{ajout_instr(JMPC,yystack.l_mark[-2].nb,yystack.l_mark[0].nb,VIDE);}
 break;
-#line 560 "y.tab.c"
+case 19:
+#line 97 "interp.y"
+	{ajout_instr(JMPR,yystack.l_mark[0].nb,VIDE,VIDE);}
+break;
+#line 576 "y.tab.c"
     }
     yystack.s_mark -= yym;
     yystate = *yystack.s_mark;

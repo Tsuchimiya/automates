@@ -1,7 +1,7 @@
 all : main
 
 main: 	lex.yy.c y.tab.c
-	gcc instr.c symboles.c y.tab.c lex.yy.c -ll -o yacc
+	gcc fonctions.c instr.c symboles.c y.tab.c lex.yy.c -ll -o yacc
 
 
 lex.yy.c : 

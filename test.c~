@@ -1,0 +1,15 @@
+int prout(){
+  
+  int a,b;
+  a=1;
+
+  while(a<2){ 
+  }
+}
+
+int main(){
+  int a=1;
+
+  
+}
+

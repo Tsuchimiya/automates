@@ -380,9 +380,9 @@ struct yy_trans_info
 static yyconst flex_int16_t yy_accept[85] =
     {   0,
         0,    0,   35,   33,    1,   12,   33,   33,   17,   18,
-        6,    9,   19,    8,    7,   31,   20,    4,   21,    5,
+        6,    9,   19,    8,    7,   31,   20,    4,   22,    5,
        32,   32,   32,   32,   32,   32,   32,   32,   15,   33,
-       16,    1,    0,    0,   26,    0,   31,    0,    2,   22,
+       16,    1,    0,    0,   26,    0,   31,    0,    2,   21,
         3,   32,   32,   32,   11,   32,   32,   32,   32,   32,
        27,    0,    0,   31,   31,   32,   32,   24,   32,   32,
        32,   32,    0,    0,   32,   13,   10,   32,   32,   32,
@@ -891,12 +891,12 @@ YY_RULE_SETUP
 case 21:
 YY_RULE_SETUP
 #line 31 "an_lex2.lex"
-{printf("teq\n"); return teq; }
+{printf("teqeq\n"); return teqeq; }
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
 #line 32 "an_lex2.lex"
-{printf("teqeq\n"); return teqeq; }
+{printf("teq\n"); return teq; }
 	YY_BREAK
 case 23:
 YY_RULE_SETUP

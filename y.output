@@ -1,0 +1,1617 @@
+   0  $accept : Prog $end
+
+   1  $$1 :
+
+   2  Prog : $$1 Fonctions
+
+   3  Fonctions : Fonction Fonctions
+   4            | Main
+
+   5  $$2 :
+
+   6  Fonction : tint tid tpo $$2 Args tpf BodyFct
+
+   7  $$3 :
+
+   8  Main : tint tmain tpo $$3 Args tpf BodyFct
+   9       |
+
+  10  $$4 :
+
+  11  Args : tint tid $$4 ArgsN
+  12       |
+
+  13  $$5 :
+
+  14  ArgsN : tv tint tid $$5 ArgsN
+  15        |
+
+  16  $$6 :
+
+  17  Body : tao $$6 Instrs taf
+
+  18  $$7 :
+
+  19  BodyFct : tao $$7 Instrs tret E tpv taf
+
+  20  Instrs : Aff tpv Instrs
+  21         | Decl tpv Instrs
+  22         | Invoc tpv Instrs
+  23         | While Instrs
+  24         | If Instrs
+  25         |
+
+  26  $$8 :
+
+  27  $$9 :
+
+  28  If : tif tpo E tpf $$8 Body $$9 Else
+
+  29  Else : telse Body
+
+  30  E : tid
+  31    | tnb
+  32    | E tinf E
+  33    | E tinfeq E
+  34    | E tsup E
+  35    | E tsupeq E
+  36    | E teqeq E
+  37    | E tet E
+  38    | E tou E
+  39    | Invoc
+  40    | tpo E tpf
+  41    | E tplus E
+  42    | E tmin E
+  43    | E tmul E
+  44    | E tdiv E
+
+  45  $$10 :
+
+  46  $$11 :
+
+  47  While : twhile $$10 tpo E tpf $$11 Body
+
+  48  $$12 :
+
+  49  $$13 :
+
+  50  Invoc : tid tpo $$12 Params $$13 tpf
+
+  51  Params : E ParamsN
+  52         |
+
+  53  ParamsN : tv E ParamsN
+  54          |
+
+  55  Aff : tid teq E
+  56      |
+
+  57  Decl1 : tid
+  58        | tid teq E
+
+  59  Decl : tint Decl1 Decln
+
+  60  Decln : tv Decl1 Decln
+  61        |
+
+state 0
+	$accept : . Prog $end  (0)
+	$$1 : .  (1)
+
+	.  reduce 1
+
+	Prog  goto 1
+	$$1  goto 2
+
+
+state 1
+	$accept : Prog . $end  (0)
+
+	$end  accept
+
+
+state 2
+	Prog : $$1 . Fonctions  (2)
+	Main : .  (9)
+
+	tint  shift 3
+	$end  reduce 9
+
+	Fonction  goto 4
+	Fonctions  goto 5
+	Main  goto 6
+
+
+state 3
+	Fonction : tint . tid tpo $$2 Args tpf BodyFct  (6)
+	Main : tint . tmain tpo $$3 Args tpf BodyFct  (8)
+
+	tmain  shift 7
+	tid  shift 8
+	.  error
+
+
+state 4
+	Fonctions : Fonction . Fonctions  (3)
+	Main : .  (9)
+
+	tint  shift 3
+	$end  reduce 9
+
+	Fonction  goto 4
+	Fonctions  goto 9
+	Main  goto 6
+
+
+state 5
+	Prog : $$1 Fonctions .  (2)
+
+	.  reduce 2
+
+
+state 6
+	Fonctions : Main .  (4)
+
+	.  reduce 4
+
+
+state 7
+	Main : tint tmain . tpo $$3 Args tpf BodyFct  (8)
+
+	tpo  shift 10
+	.  error
+
+
+state 8
+	Fonction : tint tid . tpo $$2 Args tpf BodyFct  (6)
+
+	tpo  shift 11
+	.  error
+
+
+state 9
+	Fonctions : Fonction Fonctions .  (3)
+
+	.  reduce 3
+
+
+state 10
+	Main : tint tmain tpo . $$3 Args tpf BodyFct  (8)
+	$$3 : .  (7)
+
+	.  reduce 7
+
+	$$3  goto 12
+
+
+state 11
+	Fonction : tint tid tpo . $$2 Args tpf BodyFct  (6)
+	$$2 : .  (5)
+
+	.  reduce 5
+
+	$$2  goto 13
+
+
+state 12
+	Main : tint tmain tpo $$3 . Args tpf BodyFct  (8)
+	Args : .  (12)
+
+	tint  shift 14
+	tpf  reduce 12
+
+	Args  goto 15
+
+
+state 13
+	Fonction : tint tid tpo $$2 . Args tpf BodyFct  (6)
+	Args : .  (12)
+
+	tint  shift 14
+	tpf  reduce 12
+
+	Args  goto 16
+
+
+state 14
+	Args : tint . tid $$4 ArgsN  (11)
+
+	tid  shift 17
+	.  error
+
+
+state 15
+	Main : tint tmain tpo $$3 Args . tpf BodyFct  (8)
+
+	tpf  shift 18
+	.  error
+
+
+state 16
+	Fonction : tint tid tpo $$2 Args . tpf BodyFct  (6)
+
+	tpf  shift 19
+	.  error
+
+
+state 17
+	Args : tint tid . $$4 ArgsN  (11)
+	$$4 : .  (10)
+
+	.  reduce 10
+
+	$$4  goto 20
+
+
+state 18
+	Main : tint tmain tpo $$3 Args tpf . BodyFct  (8)
+
+	tao  shift 21
+	.  error
+
+	BodyFct  goto 22
+
+
+state 19
+	Fonction : tint tid tpo $$2 Args tpf . BodyFct  (6)
+
+	tao  shift 21
+	.  error
+
+	BodyFct  goto 23
+
+
+state 20
+	Args : tint tid $$4 . ArgsN  (11)
+	ArgsN : .  (15)
+
+	tv  shift 24
+	tpf  reduce 15
+
+	ArgsN  goto 25
+
+
+state 21
+	BodyFct : tao . $$7 Instrs tret E tpv taf  (19)
+	$$7 : .  (18)
+
+	.  reduce 18
+
+	$$7  goto 26
+
+
+state 22
+	Main : tint tmain tpo $$3 Args tpf BodyFct .  (8)
+
+	.  reduce 8
+
+
+state 23
+	Fonction : tint tid tpo $$2 Args tpf BodyFct .  (6)
+
+	.  reduce 6
+
+
+state 24
+	ArgsN : tv . tint tid $$5 ArgsN  (14)
+
+	tint  shift 27
+	.  error
+
+
+state 25
+	Args : tint tid $$4 ArgsN .  (11)
+
+	.  reduce 11
+
+
+state 26
+	BodyFct : tao $$7 . Instrs tret E tpv taf  (19)
+	Instrs : .  (25)
+	Aff : .  (56)
+
+	tif  shift 28
+	twhile  shift 29
+	tint  shift 30
+	tid  shift 31
+	tpv  reduce 56
+	tret  reduce 25
+
+	Invoc  goto 32
+	Instrs  goto 33
+	Aff  goto 34
+	Decl  goto 35
+	While  goto 36
+	If  goto 37
+
+
+state 27
+	ArgsN : tv tint . tid $$5 ArgsN  (14)
+
+	tid  shift 38
+	.  error
+
+
+state 28
+	If : tif . tpo E tpf $$8 Body $$9 Else  (28)
+
+	tpo  shift 39
+	.  error
+
+
+state 29
+	While : twhile . $$10 tpo E tpf $$11 Body  (47)
+	$$10 : .  (45)
+
+	.  reduce 45
+
+	$$10  goto 40
+
+
+state 30
+	Decl : tint . Decl1 Decln  (59)
+
+	tid  shift 41
+	.  error
+
+	Decl1  goto 42
+
+
+state 31
+	Invoc : tid . tpo $$12 Params $$13 tpf  (50)
+	Aff : tid . teq E  (55)
+
+	tpo  shift 43
+	teq  shift 44
+	.  error
+
+
+state 32
+	Instrs : Invoc . tpv Instrs  (22)
+
+	tpv  shift 45
+	.  error
+
+
+state 33
+	BodyFct : tao $$7 Instrs . tret E tpv taf  (19)
+
+	tret  shift 46
+	.  error
+
+
+state 34
+	Instrs : Aff . tpv Instrs  (20)
+
+	tpv  shift 47
+	.  error
+
+
+state 35
+	Instrs : Decl . tpv Instrs  (21)
+
+	tpv  shift 48
+	.  error
+
+
+state 36
+	Instrs : While . Instrs  (23)
+	Instrs : .  (25)
+	Aff : .  (56)
+
+	tif  shift 28
+	twhile  shift 29
+	tint  shift 30
+	tid  shift 31
+	taf  reduce 25
+	tpv  reduce 56
+	tret  reduce 25
+
+	Invoc  goto 32
+	Instrs  goto 49
+	Aff  goto 34
+	Decl  goto 35
+	While  goto 36
+	If  goto 37
+
+
+state 37
+	Instrs : If . Instrs  (24)
+	Instrs : .  (25)
+	Aff : .  (56)
+
+	tif  shift 28
+	twhile  shift 29
+	tint  shift 30
+	tid  shift 31
+	taf  reduce 25
+	tpv  reduce 56
+	tret  reduce 25
+
+	Invoc  goto 32
+	Instrs  goto 50
+	Aff  goto 34
+	Decl  goto 35
+	While  goto 36
+	If  goto 37
+
+
+state 38
+	ArgsN : tv tint tid . $$5 ArgsN  (14)
+	$$5 : .  (13)
+
+	.  reduce 13
+
+	$$5  goto 51
+
+
+state 39
+	If : tif tpo . E tpf $$8 Body $$9 Else  (28)
+
+	tpo  shift 52
+	tnb  shift 53
+	tid  shift 54
+	.  error
+
+	E  goto 55
+	Invoc  goto 56
+
+
+state 40
+	While : twhile $$10 . tpo E tpf $$11 Body  (47)
+
+	tpo  shift 57
+	.  error
+
+
+state 41
+	Decl1 : tid .  (57)
+	Decl1 : tid . teq E  (58)
+
+	teq  shift 58
+	tv  reduce 57
+	tpv  reduce 57
+
+
+state 42
+	Decl : tint Decl1 . Decln  (59)
+	Decln : .  (61)
+
+	tv  shift 59
+	tpv  reduce 61
+
+	Decln  goto 60
+
+
+state 43
+	Invoc : tid tpo . $$12 Params $$13 tpf  (50)
+	$$12 : .  (48)
+
+	.  reduce 48
+
+	$$12  goto 61
+
+
+state 44
+	Aff : tid teq . E  (55)
+
+	tpo  shift 52
+	tnb  shift 53
+	tid  shift 54
+	.  error
+
+	E  goto 62
+	Invoc  goto 56
+
+
+state 45
+	Instrs : Invoc tpv . Instrs  (22)
+	Instrs : .  (25)
+	Aff : .  (56)
+
+	tif  shift 28
+	twhile  shift 29
+	tint  shift 30
+	tid  shift 31
+	taf  reduce 25
+	tpv  reduce 56
+	tret  reduce 25
+
+	Invoc  goto 32
+	Instrs  goto 63
+	Aff  goto 34
+	Decl  goto 35
+	While  goto 36
+	If  goto 37
+
+
+state 46
+	BodyFct : tao $$7 Instrs tret . E tpv taf  (19)
+
+	tpo  shift 52
+	tnb  shift 53
+	tid  shift 54
+	.  error
+
+	E  goto 64
+	Invoc  goto 56
+
+
+state 47
+	Instrs : Aff tpv . Instrs  (20)
+	Instrs : .  (25)
+	Aff : .  (56)
+
+	tif  shift 28
+	twhile  shift 29
+	tint  shift 30
+	tid  shift 31
+	taf  reduce 25
+	tpv  reduce 56
+	tret  reduce 25
+
+	Invoc  goto 32
+	Instrs  goto 65
+	Aff  goto 34
+	Decl  goto 35
+	While  goto 36
+	If  goto 37
+
+
+state 48
+	Instrs : Decl tpv . Instrs  (21)
+	Instrs : .  (25)
+	Aff : .  (56)
+
+	tif  shift 28
+	twhile  shift 29
+	tint  shift 30
+	tid  shift 31
+	taf  reduce 25
+	tpv  reduce 56
+	tret  reduce 25
+
+	Invoc  goto 32
+	Instrs  goto 66
+	Aff  goto 34
+	Decl  goto 35
+	While  goto 36
+	If  goto 37
+
+
+state 49
+	Instrs : While Instrs .  (23)
+
+	.  reduce 23
+
+
+state 50
+	Instrs : If Instrs .  (24)
+
+	.  reduce 24
+
+
+state 51
+	ArgsN : tv tint tid $$5 . ArgsN  (14)
+	ArgsN : .  (15)
+
+	tv  shift 24
+	tpf  reduce 15
+
+	ArgsN  goto 67
+
+
+state 52
+	E : tpo . E tpf  (40)
+
+	tpo  shift 52
+	tnb  shift 53
+	tid  shift 54
+	.  error
+
+	E  goto 68
+	Invoc  goto 56
+
+
+state 53
+	E : tnb .  (31)
+
+	.  reduce 31
+
+
+state 54
+	E : tid .  (30)
+	Invoc : tid . tpo $$12 Params $$13 tpf  (50)
+
+	tpo  shift 43
+	tmin  reduce 30
+	tplus  reduce 30
+	tmul  reduce 30
+	tdiv  reduce 30
+	tpf  reduce 30
+	tv  reduce 30
+	tpv  reduce 30
+	teqeq  reduce 30
+	tet  reduce 30
+	tou  reduce 30
+	tinf  reduce 30
+	tinfeq  reduce 30
+	tsup  reduce 30
+	tsupeq  reduce 30
+
+
+state 55
+	If : tif tpo E . tpf $$8 Body $$9 Else  (28)
+	E : E . tinf E  (32)
+	E : E . tinfeq E  (33)
+	E : E . tsup E  (34)
+	E : E . tsupeq E  (35)
+	E : E . teqeq E  (36)
+	E : E . tet E  (37)
+	E : E . tou E  (38)
+	E : E . tplus E  (41)
+	E : E . tmin E  (42)
+	E : E . tmul E  (43)
+	E : E . tdiv E  (44)
+
+	tmin  shift 69
+	tplus  shift 70
+	tmul  shift 71
+	tdiv  shift 72
+	tpf  shift 73
+	teqeq  shift 74
+	tet  shift 75
+	tou  shift 76
+	tinf  shift 77
+	tinfeq  shift 78
+	tsup  shift 79
+	tsupeq  shift 80
+	.  error
+
+
+state 56
+	E : Invoc .  (39)
+
+	.  reduce 39
+
+
+state 57
+	While : twhile $$10 tpo . E tpf $$11 Body  (47)
+
+	tpo  shift 52
+	tnb  shift 53
+	tid  shift 54
+	.  error
+
+	E  goto 81
+	Invoc  goto 56
+
+
+state 58
+	Decl1 : tid teq . E  (58)
+
+	tpo  shift 52
+	tnb  shift 53
+	tid  shift 54
+	.  error
+
+	E  goto 82
+	Invoc  goto 56
+
+
+state 59
+	Decln : tv . Decl1 Decln  (60)
+
+	tid  shift 41
+	.  error
+
+	Decl1  goto 83
+
+
+state 60
+	Decl : tint Decl1 Decln .  (59)
+
+	.  reduce 59
+
+
+state 61
+	Invoc : tid tpo $$12 . Params $$13 tpf  (50)
+	Params : .  (52)
+
+	tpo  shift 52
+	tnb  shift 53
+	tid  shift 54
+	tpf  reduce 52
+
+	E  goto 84
+	Invoc  goto 56
+	Params  goto 85
+
+
+state 62
+	E : E . tinf E  (32)
+	E : E . tinfeq E  (33)
+	E : E . tsup E  (34)
+	E : E . tsupeq E  (35)
+	E : E . teqeq E  (36)
+	E : E . tet E  (37)
+	E : E . tou E  (38)
+	E : E . tplus E  (41)
+	E : E . tmin E  (42)
+	E : E . tmul E  (43)
+	E : E . tdiv E  (44)
+	Aff : tid teq E .  (55)
+
+	tmin  shift 69
+	tplus  shift 70
+	tmul  shift 71
+	tdiv  shift 72
+	teqeq  shift 74
+	tet  shift 75
+	tou  shift 76
+	tinf  shift 77
+	tinfeq  shift 78
+	tsup  shift 79
+	tsupeq  shift 80
+	tpv  reduce 55
+
+
+state 63
+	Instrs : Invoc tpv Instrs .  (22)
+
+	.  reduce 22
+
+
+state 64
+	BodyFct : tao $$7 Instrs tret E . tpv taf  (19)
+	E : E . tinf E  (32)
+	E : E . tinfeq E  (33)
+	E : E . tsup E  (34)
+	E : E . tsupeq E  (35)
+	E : E . teqeq E  (36)
+	E : E . tet E  (37)
+	E : E . tou E  (38)
+	E : E . tplus E  (41)
+	E : E . tmin E  (42)
+	E : E . tmul E  (43)
+	E : E . tdiv E  (44)
+
+	tmin  shift 69
+	tplus  shift 70
+	tmul  shift 71
+	tdiv  shift 72
+	tpv  shift 86
+	teqeq  shift 74
+	tet  shift 75
+	tou  shift 76
+	tinf  shift 77
+	tinfeq  shift 78
+	tsup  shift 79
+	tsupeq  shift 80
+	.  error
+
+
+state 65
+	Instrs : Aff tpv Instrs .  (20)
+
+	.  reduce 20
+
+
+state 66
+	Instrs : Decl tpv Instrs .  (21)
+
+	.  reduce 21
+
+
+state 67
+	ArgsN : tv tint tid $$5 ArgsN .  (14)
+
+	.  reduce 14
+
+
+state 68
+	E : E . tinf E  (32)
+	E : E . tinfeq E  (33)
+	E : E . tsup E  (34)
+	E : E . tsupeq E  (35)
+	E : E . teqeq E  (36)
+	E : E . tet E  (37)
+	E : E . tou E  (38)
+	E : tpo E . tpf  (40)
+	E : E . tplus E  (41)
+	E : E . tmin E  (42)
+	E : E . tmul E  (43)
+	E : E . tdiv E  (44)
+
+	tmin  shift 69
+	tplus  shift 70
+	tmul  shift 71
+	tdiv  shift 72
+	tpf  shift 87
+	teqeq  shift 74
+	tet  shift 75
+	tou  shift 76
+	tinf  shift 77
+	tinfeq  shift 78
+	tsup  shift 79
+	tsupeq  shift 80
+	.  error
+
+
+state 69
+	E : E tmin . E  (42)
+
+	tpo  shift 52
+	tnb  shift 53
+	tid  shift 54
+	.  error
+
+	E  goto 88
+	Invoc  goto 56
+
+
+state 70
+	E : E tplus . E  (41)
+
+	tpo  shift 52
+	tnb  shift 53
+	tid  shift 54
+	.  error
+
+	E  goto 89
+	Invoc  goto 56
+
+
+state 71
+	E : E tmul . E  (43)
+
+	tpo  shift 52
+	tnb  shift 53
+	tid  shift 54
+	.  error
+
+	E  goto 90
+	Invoc  goto 56
+
+
+state 72
+	E : E tdiv . E  (44)
+
+	tpo  shift 52
+	tnb  shift 53
+	tid  shift 54
+	.  error
+
+	E  goto 91
+	Invoc  goto 56
+
+
+state 73
+	If : tif tpo E tpf . $$8 Body $$9 Else  (28)
+	$$8 : .  (26)
+
+	.  reduce 26
+
+	$$8  goto 92
+
+
+state 74
+	E : E teqeq . E  (36)
+
+	tpo  shift 52
+	tnb  shift 53
+	tid  shift 54
+	.  error
+
+	E  goto 93
+	Invoc  goto 56
+
+
+state 75
+	E : E tet . E  (37)
+
+	tpo  shift 52
+	tnb  shift 53
+	tid  shift 54
+	.  error
+
+	E  goto 94
+	Invoc  goto 56
+
+
+state 76
+	E : E tou . E  (38)
+
+	tpo  shift 52
+	tnb  shift 53
+	tid  shift 54
+	.  error
+
+	E  goto 95
+	Invoc  goto 56
+
+
+state 77
+	E : E tinf . E  (32)
+
+	tpo  shift 52
+	tnb  shift 53
+	tid  shift 54
+	.  error
+
+	E  goto 96
+	Invoc  goto 56
+
+
+state 78
+	E : E tinfeq . E  (33)
+
+	tpo  shift 52
+	tnb  shift 53
+	tid  shift 54
+	.  error
+
+	E  goto 97
+	Invoc  goto 56
+
+
+state 79
+	E : E tsup . E  (34)
+
+	tpo  shift 52
+	tnb  shift 53
+	tid  shift 54
+	.  error
+
+	E  goto 98
+	Invoc  goto 56
+
+
+state 80
+	E : E tsupeq . E  (35)
+
+	tpo  shift 52
+	tnb  shift 53
+	tid  shift 54
+	.  error
+
+	E  goto 99
+	Invoc  goto 56
+
+
+state 81
+	E : E . tinf E  (32)
+	E : E . tinfeq E  (33)
+	E : E . tsup E  (34)
+	E : E . tsupeq E  (35)
+	E : E . teqeq E  (36)
+	E : E . tet E  (37)
+	E : E . tou E  (38)
+	E : E . tplus E  (41)
+	E : E . tmin E  (42)
+	E : E . tmul E  (43)
+	E : E . tdiv E  (44)
+	While : twhile $$10 tpo E . tpf $$11 Body  (47)
+
+	tmin  shift 69
+	tplus  shift 70
+	tmul  shift 71
+	tdiv  shift 72
+	tpf  shift 100
+	teqeq  shift 74
+	tet  shift 75
+	tou  shift 76
+	tinf  shift 77
+	tinfeq  shift 78
+	tsup  shift 79
+	tsupeq  shift 80
+	.  error
+
+
+state 82
+	E : E . tinf E  (32)
+	E : E . tinfeq E  (33)
+	E : E . tsup E  (34)
+	E : E . tsupeq E  (35)
+	E : E . teqeq E  (36)
+	E : E . tet E  (37)
+	E : E . tou E  (38)
+	E : E . tplus E  (41)
+	E : E . tmin E  (42)
+	E : E . tmul E  (43)
+	E : E . tdiv E  (44)
+	Decl1 : tid teq E .  (58)
+
+	tmin  shift 69
+	tplus  shift 70
+	tmul  shift 71
+	tdiv  shift 72
+	teqeq  shift 74
+	tet  shift 75
+	tou  shift 76
+	tinf  shift 77
+	tinfeq  shift 78
+	tsup  shift 79
+	tsupeq  shift 80
+	tv  reduce 58
+	tpv  reduce 58
+
+
+state 83
+	Decln : tv Decl1 . Decln  (60)
+	Decln : .  (61)
+
+	tv  shift 59
+	tpv  reduce 61
+
+	Decln  goto 101
+
+
+state 84
+	E : E . tinf E  (32)
+	E : E . tinfeq E  (33)
+	E : E . tsup E  (34)
+	E : E . tsupeq E  (35)
+	E : E . teqeq E  (36)
+	E : E . tet E  (37)
+	E : E . tou E  (38)
+	E : E . tplus E  (41)
+	E : E . tmin E  (42)
+	E : E . tmul E  (43)
+	E : E . tdiv E  (44)
+	Params : E . ParamsN  (51)
+	ParamsN : .  (54)
+
+	tmin  shift 69
+	tplus  shift 70
+	tmul  shift 71
+	tdiv  shift 72
+	tv  shift 102
+	teqeq  shift 74
+	tet  shift 75
+	tou  shift 76
+	tinf  shift 77
+	tinfeq  shift 78
+	tsup  shift 79
+	tsupeq  shift 80
+	tpf  reduce 54
+
+	ParamsN  goto 103
+
+
+state 85
+	Invoc : tid tpo $$12 Params . $$13 tpf  (50)
+	$$13 : .  (49)
+
+	.  reduce 49
+
+	$$13  goto 104
+
+
+state 86
+	BodyFct : tao $$7 Instrs tret E tpv . taf  (19)
+
+	taf  shift 105
+	.  error
+
+
+state 87
+	E : tpo E tpf .  (40)
+
+	.  reduce 40
+
+
+state 88
+	E : E . tinf E  (32)
+	E : E . tinfeq E  (33)
+	E : E . tsup E  (34)
+	E : E . tsupeq E  (35)
+	E : E . teqeq E  (36)
+	E : E . tet E  (37)
+	E : E . tou E  (38)
+	E : E . tplus E  (41)
+	E : E . tmin E  (42)
+	E : E tmin E .  (42)
+	E : E . tmul E  (43)
+	E : E . tdiv E  (44)
+
+	teqeq  shift 74
+	tet  shift 75
+	tou  shift 76
+	tinf  shift 77
+	tinfeq  shift 78
+	tsup  shift 79
+	tsupeq  shift 80
+	tmin  reduce 42
+	tplus  reduce 42
+	tmul  reduce 42
+	tdiv  reduce 42
+	tpf  reduce 42
+	tv  reduce 42
+	tpv  reduce 42
+
+
+state 89
+	E : E . tinf E  (32)
+	E : E . tinfeq E  (33)
+	E : E . tsup E  (34)
+	E : E . tsupeq E  (35)
+	E : E . teqeq E  (36)
+	E : E . tet E  (37)
+	E : E . tou E  (38)
+	E : E . tplus E  (41)
+	E : E tplus E .  (41)
+	E : E . tmin E  (42)
+	E : E . tmul E  (43)
+	E : E . tdiv E  (44)
+
+	tmin  shift 69
+	teqeq  shift 74
+	tet  shift 75
+	tou  shift 76
+	tinf  shift 77
+	tinfeq  shift 78
+	tsup  shift 79
+	tsupeq  shift 80
+	tplus  reduce 41
+	tmul  reduce 41
+	tdiv  reduce 41
+	tpf  reduce 41
+	tv  reduce 41
+	tpv  reduce 41
+
+
+state 90
+	E : E . tinf E  (32)
+	E : E . tinfeq E  (33)
+	E : E . tsup E  (34)
+	E : E . tsupeq E  (35)
+	E : E . teqeq E  (36)
+	E : E . tet E  (37)
+	E : E . tou E  (38)
+	E : E . tplus E  (41)
+	E : E . tmin E  (42)
+	E : E . tmul E  (43)
+	E : E tmul E .  (43)
+	E : E . tdiv E  (44)
+
+	tmin  shift 69
+	tplus  shift 70
+	tdiv  shift 72
+	teqeq  shift 74
+	tet  shift 75
+	tou  shift 76
+	tinf  shift 77
+	tinfeq  shift 78
+	tsup  shift 79
+	tsupeq  shift 80
+	tmul  reduce 43
+	tpf  reduce 43
+	tv  reduce 43
+	tpv  reduce 43
+
+
+state 91
+	E : E . tinf E  (32)
+	E : E . tinfeq E  (33)
+	E : E . tsup E  (34)
+	E : E . tsupeq E  (35)
+	E : E . teqeq E  (36)
+	E : E . tet E  (37)
+	E : E . tou E  (38)
+	E : E . tplus E  (41)
+	E : E . tmin E  (42)
+	E : E . tmul E  (43)
+	E : E . tdiv E  (44)
+	E : E tdiv E .  (44)
+
+	tmin  shift 69
+	tplus  shift 70
+	teqeq  shift 74
+	tet  shift 75
+	tou  shift 76
+	tinf  shift 77
+	tinfeq  shift 78
+	tsup  shift 79
+	tsupeq  shift 80
+	tmul  reduce 44
+	tdiv  reduce 44
+	tpf  reduce 44
+	tv  reduce 44
+	tpv  reduce 44
+
+
+state 92
+	If : tif tpo E tpf $$8 . Body $$9 Else  (28)
+
+	tao  shift 106
+	.  error
+
+	Body  goto 107
+
+
+state 93
+	E : E . tinf E  (32)
+	E : E . tinfeq E  (33)
+	E : E . tsup E  (34)
+	E : E . tsupeq E  (35)
+	E : E . teqeq E  (36)
+	E : E teqeq E .  (36)
+	E : E . tet E  (37)
+	E : E . tou E  (38)
+	E : E . tplus E  (41)
+	E : E . tmin E  (42)
+	E : E . tmul E  (43)
+	E : E . tdiv E  (44)
+
+	tet  shift 75
+	tou  shift 76
+	tinf  shift 77
+	tinfeq  shift 78
+	tsup  shift 79
+	tsupeq  shift 80
+	tmin  reduce 36
+	tplus  reduce 36
+	tmul  reduce 36
+	tdiv  reduce 36
+	tpf  reduce 36
+	tv  reduce 36
+	tpv  reduce 36
+	teqeq  reduce 36
+
+
+state 94
+	E : E . tinf E  (32)
+	E : E . tinfeq E  (33)
+	E : E . tsup E  (34)
+	E : E . tsupeq E  (35)
+	E : E . teqeq E  (36)
+	E : E . tet E  (37)
+	E : E tet E .  (37)
+	E : E . tou E  (38)
+	E : E . tplus E  (41)
+	E : E . tmin E  (42)
+	E : E . tmul E  (43)
+	E : E . tdiv E  (44)
+
+	tou  shift 76
+	tinf  shift 77
+	tinfeq  shift 78
+	tsup  shift 79
+	tsupeq  shift 80
+	tmin  reduce 37
+	tplus  reduce 37
+	tmul  reduce 37
+	tdiv  reduce 37
+	tpf  reduce 37
+	tv  reduce 37
+	tpv  reduce 37
+	teqeq  reduce 37
+	tet  reduce 37
+
+
+state 95
+	E : E . tinf E  (32)
+	E : E . tinfeq E  (33)
+	E : E . tsup E  (34)
+	E : E . tsupeq E  (35)
+	E : E . teqeq E  (36)
+	E : E . tet E  (37)
+	E : E . tou E  (38)
+	E : E tou E .  (38)
+	E : E . tplus E  (41)
+	E : E . tmin E  (42)
+	E : E . tmul E  (43)
+	E : E . tdiv E  (44)
+
+	tinf  shift 77
+	tinfeq  shift 78
+	tsup  shift 79
+	tsupeq  shift 80
+	tmin  reduce 38
+	tplus  reduce 38
+	tmul  reduce 38
+	tdiv  reduce 38
+	tpf  reduce 38
+	tv  reduce 38
+	tpv  reduce 38
+	teqeq  reduce 38
+	tet  reduce 38
+	tou  reduce 38
+
+
+state 96
+	E : E . tinf E  (32)
+	E : E tinf E .  (32)
+	E : E . tinfeq E  (33)
+	E : E . tsup E  (34)
+	E : E . tsupeq E  (35)
+	E : E . teqeq E  (36)
+	E : E . tet E  (37)
+	E : E . tou E  (38)
+	E : E . tplus E  (41)
+	E : E . tmin E  (42)
+	E : E . tmul E  (43)
+	E : E . tdiv E  (44)
+
+	tinfeq  shift 78
+	tsup  shift 79
+	tsupeq  shift 80
+	tmin  reduce 32
+	tplus  reduce 32
+	tmul  reduce 32
+	tdiv  reduce 32
+	tpf  reduce 32
+	tv  reduce 32
+	tpv  reduce 32
+	teqeq  reduce 32
+	tet  reduce 32
+	tou  reduce 32
+	tinf  reduce 32
+
+
+state 97
+	E : E . tinf E  (32)
+	E : E . tinfeq E  (33)
+	E : E tinfeq E .  (33)
+	E : E . tsup E  (34)
+	E : E . tsupeq E  (35)
+	E : E . teqeq E  (36)
+	E : E . tet E  (37)
+	E : E . tou E  (38)
+	E : E . tplus E  (41)
+	E : E . tmin E  (42)
+	E : E . tmul E  (43)
+	E : E . tdiv E  (44)
+
+	tsup  shift 79
+	tsupeq  shift 80
+	tmin  reduce 33
+	tplus  reduce 33
+	tmul  reduce 33
+	tdiv  reduce 33
+	tpf  reduce 33
+	tv  reduce 33
+	tpv  reduce 33
+	teqeq  reduce 33
+	tet  reduce 33
+	tou  reduce 33
+	tinf  reduce 33
+	tinfeq  reduce 33
+
+
+state 98
+	E : E . tinf E  (32)
+	E : E . tinfeq E  (33)
+	E : E . tsup E  (34)
+	E : E tsup E .  (34)
+	E : E . tsupeq E  (35)
+	E : E . teqeq E  (36)
+	E : E . tet E  (37)
+	E : E . tou E  (38)
+	E : E . tplus E  (41)
+	E : E . tmin E  (42)
+	E : E . tmul E  (43)
+	E : E . tdiv E  (44)
+
+	tsupeq  shift 80
+	tmin  reduce 34
+	tplus  reduce 34
+	tmul  reduce 34
+	tdiv  reduce 34
+	tpf  reduce 34
+	tv  reduce 34
+	tpv  reduce 34
+	teqeq  reduce 34
+	tet  reduce 34
+	tou  reduce 34
+	tinf  reduce 34
+	tinfeq  reduce 34
+	tsup  reduce 34
+
+
+state 99
+	E : E . tinf E  (32)
+	E : E . tinfeq E  (33)
+	E : E . tsup E  (34)
+	E : E . tsupeq E  (35)
+	E : E tsupeq E .  (35)
+	E : E . teqeq E  (36)
+	E : E . tet E  (37)
+	E : E . tou E  (38)
+	E : E . tplus E  (41)
+	E : E . tmin E  (42)
+	E : E . tmul E  (43)
+	E : E . tdiv E  (44)
+
+	.  reduce 35
+
+
+state 100
+	While : twhile $$10 tpo E tpf . $$11 Body  (47)
+	$$11 : .  (46)
+
+	.  reduce 46
+
+	$$11  goto 108
+
+
+state 101
+	Decln : tv Decl1 Decln .  (60)
+
+	.  reduce 60
+
+
+state 102
+	ParamsN : tv . E ParamsN  (53)
+
+	tpo  shift 52
+	tnb  shift 53
+	tid  shift 54
+	.  error
+
+	E  goto 109
+	Invoc  goto 56
+
+
+state 103
+	Params : E ParamsN .  (51)
+
+	.  reduce 51
+
+
+state 104
+	Invoc : tid tpo $$12 Params $$13 . tpf  (50)
+
+	tpf  shift 110
+	.  error
+
+
+state 105
+	BodyFct : tao $$7 Instrs tret E tpv taf .  (19)
+
+	.  reduce 19
+
+
+state 106
+	Body : tao . $$6 Instrs taf  (17)
+	$$6 : .  (16)
+
+	.  reduce 16
+
+	$$6  goto 111
+
+
+state 107
+	If : tif tpo E tpf $$8 Body . $$9 Else  (28)
+	$$9 : .  (27)
+
+	.  reduce 27
+
+	$$9  goto 112
+
+
+state 108
+	While : twhile $$10 tpo E tpf $$11 . Body  (47)
+
+	tao  shift 106
+	.  error
+
+	Body  goto 113
+
+
+state 109
+	E : E . tinf E  (32)
+	E : E . tinfeq E  (33)
+	E : E . tsup E  (34)
+	E : E . tsupeq E  (35)
+	E : E . teqeq E  (36)
+	E : E . tet E  (37)
+	E : E . tou E  (38)
+	E : E . tplus E  (41)
+	E : E . tmin E  (42)
+	E : E . tmul E  (43)
+	E : E . tdiv E  (44)
+	ParamsN : tv E . ParamsN  (53)
+	ParamsN : .  (54)
+
+	tmin  shift 69
+	tplus  shift 70
+	tmul  shift 71
+	tdiv  shift 72
+	tv  shift 102
+	teqeq  shift 74
+	tet  shift 75
+	tou  shift 76
+	tinf  shift 77
+	tinfeq  shift 78
+	tsup  shift 79
+	tsupeq  shift 80
+	tpf  reduce 54
+
+	ParamsN  goto 114
+
+
+state 110
+	Invoc : tid tpo $$12 Params $$13 tpf .  (50)
+
+	.  reduce 50
+
+
+state 111
+	Body : tao $$6 . Instrs taf  (17)
+	Instrs : .  (25)
+	Aff : .  (56)
+
+	tif  shift 28
+	twhile  shift 29
+	tint  shift 30
+	tid  shift 31
+	taf  reduce 25
+	tpv  reduce 56
+
+	Invoc  goto 32
+	Instrs  goto 115
+	Aff  goto 34
+	Decl  goto 35
+	While  goto 36
+	If  goto 37
+
+
+state 112
+	If : tif tpo E tpf $$8 Body $$9 . Else  (28)
+
+	telse  shift 116
+	.  error
+
+	Else  goto 117
+
+
+state 113
+	While : twhile $$10 tpo E tpf $$11 Body .  (47)
+
+	.  reduce 47
+
+
+state 114
+	ParamsN : tv E ParamsN .  (53)
+
+	.  reduce 53
+
+
+state 115
+	Body : tao $$6 Instrs . taf  (17)
+
+	taf  shift 118
+	.  error
+
+
+state 116
+	Else : telse . Body  (29)
+
+	tao  shift 106
+	.  error
+
+	Body  goto 119
+
+
+state 117
+	If : tif tpo E tpf $$8 Body $$9 Else .  (28)
+
+	.  reduce 28
+
+
+state 118
+	Body : tao $$6 Instrs taf .  (17)
+
+	.  reduce 17
+
+
+state 119
+	Else : telse Body .  (29)
+
+	.  reduce 29
+
+
+34 terminals, 34 nonterminals
+62 grammar rules, 120 states

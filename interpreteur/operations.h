@@ -16,6 +16,7 @@
 #define SUPE 0xd
 #define JMP 0xe
 #define JMPC 0xf
+#define JMPR 0x10
 
 #define R0 0x00
 #define R1 0x01
@@ -27,6 +28,9 @@
 #define R7 0x07
 #define R8 0x08
 #define R9 0x09
+#define R21 0x15
+#define R22 0x16
+#define R23 0x17
 #define VIDE 0xFF
 
 #endif
